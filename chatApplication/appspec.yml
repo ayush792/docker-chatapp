@@ -1,0 +1,19 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /new_chatapp
+
+hooks:
+  BeforeInstall:
+    - location: scripts/remove.sh
+      timeout: 300
+      runas: root
+  AfterInstall:
+    - location: scripts/installationcommands.sh
+      timeout: 600
+      runas: root
+  ApplicationStart:
+    - location: scripts/startproject.sh
+      timeout: 600
+      runas: root

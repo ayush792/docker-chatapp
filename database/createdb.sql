@@ -1,0 +1,3 @@
+CREATE DATABASE chatAppDatabase;
+CREATE USER Ayush WITH PASSWORD 'Ayushverma123';
+GRANT ALL PRIVILEGES ON DATABASE "chatAppDatabase" to Ayush;

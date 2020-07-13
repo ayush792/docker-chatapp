@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  database:
+    build:
+       context: ./database/
+    volumes:
+      - db_volume:/var/lib/postgresql/data/
+    hostname: database1
+    container_name: database1
+    ports:
+     - "5432:5432"
+    environment:
+     - POSTGRES_USER=Ayush
+     - POSTGRES_PASSWORD=Ayushverma123
+     - POSTGRES_DB=chatAppDatabase
+    restart: always
+
+  chatapplication:
+    build:
+       context: .
+    hostname: chatapplication
+    container_name: chatapplication
+    ports:
+     - "8000:8000"
+    depends_on:
+     - database
+    restart: always
+
+  nginx:
+    build:
+       context: ./nginx
+    hostname: nginx
+    container_name: nginx
+    ports:
+     - "80:80"
+    depends_on:
+     - chatapplication
+    restart: always
+volumes:
+  db_volume:
