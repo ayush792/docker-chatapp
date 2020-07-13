@@ -5,9 +5,9 @@ pipeline {
 			steps {
 				sh ''' #! /bin/bash
 				ssh -i /var/lib/jenkins/.ssh/id_rsa root@3.135.192.4 '
-				sudo rm -rf Pipeline-Chatapp/
+				sudo rm -rf chatPipeline/
 				'
-				scp -r /var/lib/jenkins/workspace/Pipeline-Chatapp root@3.135.192.4:
+				scp -r /var/lib/jenkins/workspace/chatPipeline root@3.135.192.4:
 				'''
 			}
 		}
@@ -15,10 +15,10 @@ pipeline {
 			steps {
 				sh ''' #! /bin/bash
 				ssh -i /var/lib/jenkins/.ssh/id_rsa root@3.135.192.4 '
-				cd Pipeline-Chatapp/
+				cd chatPipeline/
 				docker stop $(docker ps -a -q)
 				docker rm $(docker ps -a -q)
-				docker rmi -f pipelinechatapp_chat:latest
+				docker rmi -f pipeline_chatapp:latest
 				docker-compose up -d
 				'
 				'''
